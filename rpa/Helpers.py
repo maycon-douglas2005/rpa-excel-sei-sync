@@ -55,7 +55,7 @@ def retornaDiaReserva(dia):
         "Sex": 4
     }
 
-    posicao_dia_reserva = retorno_dia.get(dia, "Dia Não Reconhecido!")
+    posicao_dia_reserva = retorno_dia.get(dia, 0)
 
     ##pegar dia exato da reserva
     quant_semanas_mes = len(matriz_mes_atual)
@@ -63,7 +63,7 @@ def retornaDiaReserva(dia):
     dia_reserva = 0
     if indice_ultima_semana != array_matriz_semana_atual:
 
-        dia_reserva = matriz_mes_atual[array_matriz_semana_atual+1][posicao_dia_reserva]
+        dia_reserva = matriz_mes_atual[int(array_matriz_semana_atual)+1][int(posicao_dia_reserva)]
     else:
         print("Ainda nao fiz essa parte")
         #dia_reserva = matriz_mes_atual[0][posicao_dia_reserva]  VOU TER Q PEGAR A VARIAVEL DO MES, ADICIONAR 1 PRA IR PRO OUTRO MES, E RODAR NOVAMENTE O calendar.monthcalendar para ter o nova matriz do outro mes, ai depois libero essa linha
@@ -73,6 +73,6 @@ def retornaDiaReserva(dia):
 ###RETORNA DIA/MES/ANO PARA DATA RESERVA
 def retornaDataReserva(dia):
 
-    data_reserva_pronta = f"{retornaDiaReserva(dia)}/{mes}/{ano}"
+    data_reserva_pronta = f"{int(retornaDiaReserva(dia))}/0{mes}/{ano}"
 
     return data_reserva_pronta

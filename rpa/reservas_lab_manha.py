@@ -21,6 +21,7 @@ Pré-requisitos / Limitações temporárias:
 pyautogui.hotkey('ctrl', 'shift', 'esc')
 time.sleep(1)
 pyautogui.hotkey('alt', 'n')
+time.sleep(1)
 pyautogui.write("https://sei.pentagonoedu.com.br/visaoAdministrativo/patrimonio/ocorrenciaPatrimonioForm.xhtml")
 pyautogui.press('enter')
 time.sleep(1)
@@ -197,11 +198,11 @@ pyautogui.hotkey('ctrl', 'c')
 time.sleep(2)
 
 ##colocando dia da semana no python
-dia_copiado_planilha = pyperclip.paste().strip()
-
+dia_copiado_planilha = str(pyperclip.paste().strip())
+time.sleep(2)
 data_reserva = Helpers.retornaDataReserva(dia_copiado_planilha)
-
-pyautogui.hotkey('alt', 'tab')
+time.sleep(2)
+pyautogui.click(x=382, y=740)
 time.sleep(2)
 pyautogui.press('tab', presses=12, interval=0.5)
 time.sleep(2)
