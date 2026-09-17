@@ -1,16 +1,16 @@
 import pyautogui
 import time
+import pyperclip
 
-import descobrir_semana
-
+import Helpers 
 
 """
 
-Pré-requisitos: 
+Pré-requisitos / Limitações temporárias: 
 
-- Estar com a planilha de reservas aberta no mesmo monitor que o navegador. 
 - Estar com o dia desejado já selecionado no filtro de dia na planilha das reservas 
 - Estar com navegador aberto logado no SEI.
+- NÃO estar com mais nenhuma planilha excel aberta.
 
 """
 
@@ -81,20 +81,6 @@ time.sleep(0.5)
 pyautogui.hotkey('ctrl', 'v')
 
 
-# TESTADO ACIMA 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ###abrindo campo nome no form
@@ -149,7 +135,7 @@ pyautogui.press('space')
 
 #DESCOBRIR SEMANA E PEGAR NUMERO DA SALA
 time.sleep(2)
-coluna_semana = descobrir_semana.retornarSemana() + 1
+coluna_semana = Helpers.retornarSemana()
 time.sleep(2)
 ##copiando sala
 pyautogui.hotkey('alt', 'tab') #volta pra planilha de reservas
@@ -192,3 +178,37 @@ pyautogui.press('tab', presses=7, interval=0.2)
 time.sleep(2)
 pyautogui.press('space')
 time.sleep(2)
+
+
+
+#DESCOBRIR DIA DA RESERVA
+##copiando dia da semana da reserva
+pyautogui.press('tab')
+time.sleep(2)
+pyautogui.press('F5')
+time.sleep(2)
+pyautogui.write('DIa')
+time.sleep(2)
+pyautogui.press('enter')
+time.sleep(2)
+pyautogui.press('down')
+time.sleep(2)
+pyautogui.hotkey('ctrl', 'c')
+time.sleep(2)
+
+##colocando dia da semana no python
+dia_copiado_planilha = pyperclip.paste().strip()
+
+data_reserva = Helpers.retornaDataReserva(dia_copiado_planilha)
+
+pyautogui.hotkey('alt', 'tab')
+time.sleep(2)
+pyautogui.press('tab', presses=12, interval=0.5)
+time.sleep(2)
+pyautogui.hotkey('ctrl', 'a')
+time.sleep(2)
+pyautogui.press('del')
+time.sleep(2)
+pyautogui.write(data_reserva, interval=0.2)
+time.sleep(2)
+pyautogui.press('enter')
