@@ -213,3 +213,44 @@ time.sleep(2)
 pyautogui.write(data_reserva, interval=0.2)
 time.sleep(2)
 pyautogui.press('enter')
+time.sleep(2)
+
+
+#PEGANDO HORARIO INICIAL E FINAL
+
+##copiando horário
+pyautogui.click(x=2816, y=387)
+time.sleep(2)
+pyautogui.press('F5')
+time.sleep(2)
+pyautogui.write("Horario")
+time.sleep(2)
+pyautogui.press('enter')
+time.sleep(2)
+pyautogui.press('down')
+time.sleep(1)
+pyautogui.hotkey('ctrl', 'c')
+
+
+##trazendo horario para o python e tratando
+horario_completo = pyperclip.paste()
+horario_separado = horario_completo.split()
+
+horario_inicial = horario_separado[0]
+horario_final = horario_separado[2]
+
+
+##colando hora inicial
+time.sleep(2)
+pyautogui.click(x=382, y=740)
+time.sleep(2)
+pyautogui.press('tab', presses=13, interval=0.5)
+time.sleep(1)
+pyautogui.press('del')
+pyautogui.write(horario_inicial)
+time.sleep(2)
+pyautogui.press('tab')
+time.sleep(1)
+pyautogui.write(horario_final)
+pyautogui.press('tab', presses=5, interval=0.3)
+pyautogui.press('space')
