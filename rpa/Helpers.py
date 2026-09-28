@@ -4,12 +4,8 @@ import calendar
 ##VARIAVEIS USADAS NAS FUNÇÕES
 dia_atual = datetime.date.today().day
 
-mes = 0
-#VERIFICANDO SE MES FOR MENOR Q 10 ELE ADICIONA 0 ANTES DO NUMERO DO MES
-if datetime.date.today().month < 10:
-    mes = f"0/{datetime.date.today().month}"
-else:
-    mes = datetime.date.today().month + 1
+mes = datetime.date.today().month
+
 
 ano = datetime.date.today().year
 matriz_mes_atual = calendar.monthcalendar(ano, mes)
@@ -33,16 +29,13 @@ def retornarSemana():
         array_matriz_semana_atual = 2
         
     elif dia_atual in matriz_mes_atual[3]:
-        semana_atual = 4
+        semana_atual = 0
         array_matriz_semana_atual = 3
         
     elif dia_atual in matriz_mes_atual[4]:
         semana_atual = 1
         array_matriz_semana_atual = 4
         
-    elif dia_atual in matriz_mes_atual[5]:
-        semana_atual = 2
-        array_matriz_semana_atual = 5
         
     else:
         print("Erro na função")
@@ -80,6 +73,6 @@ def retornaDiaReserva(dia):
 ###RETORNA DIA/MES/ANO PARA DATA RESERVA
 def retornaDataReserva(dia):
 
-    data_reserva_pronta = f"{int(retornaDiaReserva(dia))}/0{mes}/{ano}"
+    data_reserva_pronta = f"{int(retornaDiaReserva(dia)):02d}/{mes:02d}/{ano}"
 
     return data_reserva_pronta
