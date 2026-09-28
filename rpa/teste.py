@@ -34,11 +34,16 @@ print(matriz_mes_atual)
 dia = pyperclip.paste().strip() 
 
 print(len(dia))
-"""
+
 
 import pyautogui
 import time
 
 
-time.sleep(2)
-print(pyautogui.position())
+
+
+import calendar
+
+print(calendar.monthcalendar(2026,9))
+
+"""

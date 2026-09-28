@@ -2,15 +2,17 @@ import datetime
 import calendar 
 
 ##VARIAVEIS USADAS NAS FUNÇÕES
-dia_atual = datetime.date.today().day
+dia_atual = 2 #datetime.date.today().day
 
-mes = datetime.date.today().month
+
+mes = 10    #datetime.date.today().month
 
 
 ano = datetime.date.today().year
 matriz_mes_atual = calendar.monthcalendar(ano, mes)
 semana_atual = 0
 array_matriz_semana_atual = 0
+quant_semanas_mes = len(matriz_mes_atual)
 
 ###DESCOBRIR QUAL SEMANA SEGUINTE PARA RESERVA
 def retornarSemana():
@@ -58,7 +60,7 @@ def retornaDiaReserva(dia):
     posicao_dia_reserva = retorno_dia.get(dia, 0)
 
     ##pegar dia exato da reserva
-    quant_semanas_mes = len(matriz_mes_atual)
+    
     indice_ultima_semana = quant_semanas_mes - 1
     dia_reserva = 0
     if indice_ultima_semana != array_matriz_semana_atual:
@@ -76,3 +78,21 @@ def retornaDataReserva(dia):
     data_reserva_pronta = f"{int(retornaDiaReserva(dia)):02d}/{mes:02d}/{ano}"
 
     return data_reserva_pronta
+
+
+#verifica se na semana seguinte tem dias do proximo mes
+def verificaExistenciaDiasProximoMes():
+    global quant_semanas_mes
+
+    #verificando se estamos na penultima semana
+    if dia_atual in array_matriz_semana_atual[quant_semanas_mes-2]:
+
+        #verificando se tem dias 00
+        if 0 in array_matriz_semana_atual[quant_semanas_mes-1]:
+            return True
+        else:
+            return False
+
+def posicaoDiaOutraSemana():
+    return True
+
