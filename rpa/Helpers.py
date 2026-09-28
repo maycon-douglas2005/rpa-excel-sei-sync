@@ -3,7 +3,14 @@ import calendar
 
 ##VARIAVEIS USADAS NAS FUNÇÕES
 dia_atual = datetime.date.today().day
-mes = datetime.date.today().month
+
+mes = 0
+#VERIFICANDO SE MES FOR MENOR Q 10 ELE ADICIONA 0 ANTES DO NUMERO DO MES
+if datetime.date.today().month < 10:
+    mes = f"0/{datetime.date.today().month}"
+else:
+    mes = datetime.date.today().month + 1
+
 ano = datetime.date.today().year
 matriz_mes_atual = calendar.monthcalendar(ano, mes)
 semana_atual = 0
