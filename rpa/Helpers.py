@@ -57,8 +57,10 @@ def retornaDiaReserva(dia):
         "Sex": 4
     }
 
-    posicao_dia_reserva = retorno_dia.get(dia, 0)
+    dia_blindado = str(dia).strip()[:3].capitalize()
+    posicao_dia_reserva = retorno_dia.get(dia_blindado, 0) # Deixe 0 como escape padrão
 
+    print(f"Dia que a função PEGOU: {posicao_dia_reserva}")
     ##pegar dia exato da reserva
     
     indice_ultima_semana = quant_semanas_mes - 1
@@ -67,9 +69,25 @@ def retornaDiaReserva(dia):
 
         dia_reserva = matriz_mes_atual[int(array_matriz_semana_atual)+1][int(posicao_dia_reserva)]
     else:
-        print("Ainda nao fiz essa parte")
-        #dia_reserva = matriz_mes_atual[0][posicao_dia_reserva]  VOU TER Q PEGAR A VARIAVEL DO MES, ADICIONAR 1 PRA IR PRO OUTRO MES, E RODAR NOVAMENTE O calendar.monthcalendar para ter o nova matriz do outro mes, ai depois libero essa linha
-        #alem disso tem a questao de q a reserva da penultima semana para a ultima semana sendo q a ultima semana contem dias do outro mes, esta com incoscistencia pq o dia do outro mes cai como zero. ARRUMAR!
+        # Pega a variável do mês e adiciona 1 para ir para o outro mês
+        proximo_mes = mes + 1
+        proximo_ano = ano
+        
+        # Proteção para a virada de ano em dezembro
+        if proximo_mes > 12:
+            proximo_mes = 1
+            proximo_ano += 1
+            
+        # Roda novamente o calendar.monthcalendar para ter a nova matriz
+        matriz_proximo_mes = calendar.monthcalendar(proximo_ano, proximo_mes)
+        
+        # Pega a variável da primeira semana (índice 0)
+        dia_reserva = matriz_proximo_mes[0][int(posicao_dia_reserva)]
+        
+        # Resolve a inconsistência do zero: se a posição do dia ainda for 0 na primeira semana do mês novo, 
+        # significa que a primeira ocorrência desse dia específico está na segunda semana (índice 1).
+        if dia_reserva == 0:
+            dia_reserva = matriz_proximo_mes[1][int(posicao_dia_reserva)]
     return dia_reserva
 
 ###RETORNA DIA/MES/ANO PARA DATA RESERVA
@@ -85,7 +103,7 @@ def verificaExistenciaDiasProximoMes():
     global quant_semanas_mes
 
     #verificando se estamos na penultima semana
-    if dia_atual in array_matriz_semana_atual[quant_semanas_mes-2]:
+    if dia_atual in matriz_mes_atual[quant_semanas_mes-2]:
 
         #verificando se tem dias 00
         if 0 in array_matriz_semana_atual[quant_semanas_mes-1]:

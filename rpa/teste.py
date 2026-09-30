@@ -1,49 +1,18 @@
-#ARQUIVO USADO PARA TESTAR SCRIPTS ANTES DE INSERIR NOS ARQUIVOS PRINCIPAIS
-"""
-import pyautogui
-import time
-import descobrir_semana
 import pyperclip
 
 
 
-time.sleep(3)
-print(pyautogui.position())
+dia_copiado = pyperclip.paste().strip()
 
 
+retorno_dia = {
+        "Seg": 0,
+        "Ter": 1,
+        "Qua": 2,
+        "Qui": 3,
+        "Sex": 4
+    }
 
-teste = descobrir_semana.retornarSemana() + 1
+posicao_dia_reserva = retorno_dia.get(dia_copiado, 3)
 
-print(teste)
-import datetime
-import calendar 
-
-dia_atual = datetime.date.today().day
-
-mes = datetime.date.today().month
-
-ano = datetime.date.today().year
-
-matriz_mes_atual = calendar.monthcalendar(ano, mes)
-
-print(matriz_mes_atual)
-
-
-
-
-dia = pyperclip.paste().strip() 
-
-print(len(dia))
-
-
-import pyautogui
-import time
-
-
-
-
-import calendar
-
-print(calendar.monthcalendar(2026,9))
-
-"""
+print(posicao_dia_reserva)
