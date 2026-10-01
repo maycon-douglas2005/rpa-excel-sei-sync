@@ -188,12 +188,13 @@ while True:
     time.sleep(1)
     pyautogui.press('space')
     time.sleep(1)
-
-
+    print("indo dar alt tab")
+    pyautogui.hotkey('alt', 'tab')
+    print('alt tab dado com sucesso')
 
     #DESCOBRIR DIA DA RESERVA
     ##copiando dia da semana da reserva
-    pyautogui.press('tab')
+    
     time.sleep(1)
     pyautogui.press('F5')
     time.sleep(1)

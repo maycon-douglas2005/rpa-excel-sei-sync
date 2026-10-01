@@ -1,6 +1,6 @@
 import datetime
 import calendar 
-
+import time
 ##VARIAVEIS USADAS NAS FUNÇÕES
 dia_atual = 2 #datetime.date.today().day
 
@@ -8,10 +8,10 @@ dia_atual = 2 #datetime.date.today().day
 mes = 10    #datetime.date.today().month
 
 
-ano = datetime.date.today().year
+ano = 2026 #datetime.date.today().year
 matriz_mes_atual = calendar.monthcalendar(ano, mes)
 semana_atual = 0
-array_matriz_semana_atual = 0
+array_matriz_semana_atual = -1
 quant_semanas_mes = len(matriz_mes_atual)
 
 ###DESCOBRIR QUAL SEMANA SEGUINTE PARA RESERVA
@@ -48,6 +48,7 @@ def retornarSemana():
 
 ###DESCOBRIR QUAL DIA EXATO DA RESERVA
 def retornaDiaReserva(dia):
+    print(f"Dia pego na função retornaDiaReserva: {dia}")
     ##posicao do dia da semana 
     retorno_dia = {
         "Seg": 0,
@@ -57,17 +58,22 @@ def retornaDiaReserva(dia):
         "Sex": 4
     }
 
-    dia_blindado = str(dia).strip()[:3].capitalize()
-    posicao_dia_reserva = retorno_dia.get(dia_blindado, 0) # Deixe 0 como escape padrão
-
+    
+    posicao_dia_reserva = retorno_dia.get(dia, 15) # Deixe 0 como escape padrão
+    time.sleep(1)
     print(f"Dia que a função PEGOU: {posicao_dia_reserva}")
     ##pegar dia exato da reserva
-    
-    indice_ultima_semana = quant_semanas_mes - 1
     dia_reserva = 0
+    dia_reserva = matriz_mes_atual[int(array_matriz_semana_atual)+1][int(posicao_dia_reserva)]
+
+    """
+
+    indice_ultima_semana = quant_semanas_mes - 1
+   
+    
     if indice_ultima_semana != array_matriz_semana_atual:
 
-        dia_reserva = matriz_mes_atual[int(array_matriz_semana_atual)+1][int(posicao_dia_reserva)]
+        
     else:
         # Pega a variável do mês e adiciona 1 para ir para o outro mês
         proximo_mes = mes + 1
@@ -88,6 +94,7 @@ def retornaDiaReserva(dia):
         # significa que a primeira ocorrência desse dia específico está na segunda semana (índice 1).
         if dia_reserva == 0:
             dia_reserva = matriz_proximo_mes[1][int(posicao_dia_reserva)]
+            """
     return dia_reserva
 
 ###RETORNA DIA/MES/ANO PARA DATA RESERVA
