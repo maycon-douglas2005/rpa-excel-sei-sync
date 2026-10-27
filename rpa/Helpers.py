@@ -2,7 +2,7 @@ import datetime
 import calendar 
 import time
 ##VARIAVEIS USADAS NAS FUNÇÕES
-dia_atual = 2 #datetime.date.today().day
+dia_atual = 23 #datetime.date.today().day
 
 
 mes = 10    #datetime.date.today().month
@@ -59,7 +59,7 @@ def retornaDiaReserva(dia):
     }
 
     
-    posicao_dia_reserva = retorno_dia.get(dia, 15) # Deixe 0 como escape padrão
+    posicao_dia_reserva = retorno_dia.get(dia, 51) # Deixe 0 como escape padrão
     time.sleep(1)
     print(f"Dia que a função PEGOU: {posicao_dia_reserva}")
     ##pegar dia exato da reserva
@@ -120,4 +120,3 @@ def verificaExistenciaDiasProximoMes():
 
 def posicaoDiaOutraSemana():
     return True
-
